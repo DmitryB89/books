@@ -1,3 +1,10 @@
 .booksListWrapper {
   margin: 0 auto;
+  max-width: 1200px;
+
+  .books {
+    display: grid;
+    grid-template-columns:1fr 1fr 1fr 1fr;
+    gap: 2rem;
+  }
 }

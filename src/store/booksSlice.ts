@@ -5,9 +5,8 @@ export type VolumeInfoType = {
   title: string
   authors: string[]
   imageLinks: {
-    smallThumbnail: string,
     thumbnail: string
-  }
+  },
 }
 
 export type ItemType = {
@@ -28,7 +27,7 @@ export type ResponseType = {
 export const fetchBooks = createAsyncThunk<ResponseType, void, { rejectValue: string }>
 ('books/fetchBooks', async (_, thunkAPI) => {
   try {
-    const response = await axios.get<ResponseType>('https://www.googleapis.com/books/v1/volumes?q=evil')
+    const response = await axios.get<ResponseType>('https://www.googleapis.com/books/v1/volumes?q=flowers')
     JSON.stringify(response.data)
     console.log(response.data)
     return response.data
@@ -88,3 +87,8 @@ const booksSlice = createSlice({
 
 export const {} = booksSlice.actions
 export default booksSlice.reducer
+
+// {
+//   smallThumbnail: string,
+//     thumbnail: string
+// }

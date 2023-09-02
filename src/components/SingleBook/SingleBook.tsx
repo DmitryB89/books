@@ -1,17 +1,25 @@
-import React from 'react';
+import React, {FC} from 'react';
 import style from './SingleBook.module.scss'
 
+type SingleBookPropsType = {
+  kind: string,
+  authors: string[]
+  title: string
+  cover: string
+}
 
-export const SingleBook = () => {
+export const SingleBook: FC<SingleBookPropsType> = ({kind, authors, title, cover}) => {
+
+
   return (
     <div className={style.singleBook}>
       <div className={style.bookCover}>
-        <img src={'https://bookcity.uk/upload/iblock/c08/c08151b9666c56910b3c5507d264c77b.jpg'} alt={'bookTitle'} />
+        <img src={cover} alt={'bookTitle'}/>
       </div>
       <div className={style.textBlock}>
-        <p>Fantasy</p>
-        <p>Alice in Wonderland</p>
-        <p>Alice in Wonderland</p>
+        <p>{kind}</p>
+        <p>{authors}</p>
+        <p>{title}</p>
         <p>Lewis Carroll</p>
       </div>
     </div>

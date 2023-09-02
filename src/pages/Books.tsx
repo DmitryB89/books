@@ -6,14 +6,13 @@ import {fetchBooks} from '../store/booksSlice';
 import {useAppDispatch, useAppSelector} from '../hooks/hooks';
 
 
-
 export const Books = () => {
   const dispatch = useAppDispatch()
-  const {books,isLoading,error}=useAppSelector(state => state.books)
+  const {books, isLoading, error, totalItems} = useAppSelector(state => state.books)
 
   useEffect(() => {
     dispatch(fetchBooks())
-  },[])
+  }, [])
 
   // async function fetchBooks() {
   //   const response = await fetch('https://www.googleapis.com/books/v1/volumes?q=search+terms');
@@ -30,9 +29,15 @@ export const Books = () => {
       {isLoading && <h1>Loading...</h1>}
       {error && <h1>{error}</h1>}
       <div className={styles.booksListWrapper}>
-        {JSON.stringify(books)}
-        <p>Books Found: 355</p>
-        <SingleBook />
+        {/*{JSON.stringify(books)}*/}
+        <p>Books Found: {totalItems}</p>
+        <div className={styles.books}>
+          {books.map(book => {
+            return <SingleBook key={book.id} kind={book.kind} authors={book.volumeInfo.authors} title={book.volumeInfo.title}
+              cover={book.volumeInfo.imageLinks.thumbnail}/>
+
+          })}
+        </div>
 
       </div>
     </>

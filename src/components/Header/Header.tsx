@@ -8,9 +8,15 @@ export const Header = () => {
 
   const [search, setSearch] = useState('')
   const [sort, setSort] = useState('')
+
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
     setSearch(event.target.value)
+  }
+
+  const onChangeSelectHandler = (value:string) => {
+    setSort(value)
+    console.log(value)
   }
 
 
@@ -40,10 +46,10 @@ export const Header = () => {
 
       <div className={style.selects}>
         <h4>Categories</h4>
-        <Select options={categoryOptions}  value={sort} onChange={value => setSort(value)}/>
+        <Select options={categoryOptions}  value={sort} onChange={onChangeSelectHandler}/>
 
         <h4>Sorting by</h4>
-        <Select options={sortingOptions} value={sort} onChange={value => setSort(value)}></Select>
+        <Select options={sortingOptions} value={sort} onChange={onChangeSelectHandler}></Select>
 
       </div>
 

@@ -1,5 +1,7 @@
 import React from 'react';
 import style from './SingleBook.module.scss'
+
+
 export const SingleBook = () => {
   return (
     <div className={style.singleBook}>

@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import axios from 'axios';
-
+const key='AIzaSyCks-FGFh7cLpuGuG7nJesq86eRsvKkFtw'
 export type VolumeInfoType = {
   title: string
   authors: string[]
@@ -24,11 +24,12 @@ export type ResponseType = {
 }
 
 
-export const fetchBooks = createAsyncThunk<ResponseType, void, { rejectValue: string }>
-('books/fetchBooks', async (_, thunkAPI) => {
+export const fetchBooks = createAsyncThunk<ResponseType, string, { rejectValue: string }>
+('books/fetchBooks', async (search, thunkAPI) => {
   try {
-    const response = await axios.get<ResponseType>('https://www.googleapis.com/books/v1/volumes?q=flowers')
-    JSON.stringify(response.data)
+    if (search) {}
+    const response = await axios.get<ResponseType>(search ?
+      'https://www.googleapis.com/books/v1/volumes?q='+search + `&key=${key}` : 'https://www.googleapis.com/books/v1/volumes?q=search+terms')
     console.log(response.data)
     return response.data
   } catch (error) {

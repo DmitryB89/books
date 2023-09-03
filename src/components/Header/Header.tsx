@@ -3,15 +3,27 @@ import style from './Header.module.scss'
 import {Button} from '../UI/Button/Button';
 import {Input} from '../UI/Input/Input';
 import {Select} from '../Select/Select';
+import {fetchBooks} from '../../store/booksSlice';
+import {useAppDispatch} from '../../hooks/hooks';
 
 export const Header = () => {
+  const dispatch = useAppDispatch()
 
   const [search, setSearch] = useState('')
   const [sort, setSort] = useState('')
+  /*  useEffect(() => {
+    dispatch(fetchBooks('startaaaaa'))
+  }, [])*/
+  const onClickHandler = () => {
+    dispatch(fetchBooks(search))
+    console.log(search)
+  }
 
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+
     event.preventDefault()
     setSearch(event.target.value)
+    console.log(search)
   }
 
   const onChangeSelectHandler = (value:string) => {
@@ -38,9 +50,10 @@ export const Header = () => {
   return (
     <header className={style.headerWrapper}>
       <h1>Search for Books</h1>
-      <form>
+      <form >
         <Input type='search' value={search} onChange={onChangeHandler}
           placeholder={'Please, enter book title'}/>
+        <button onClick={onClickHandler}>PRESS</button>
         <Button>Search</Button>
       </form>
 

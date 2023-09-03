@@ -1,16 +1,17 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import axios from 'axios';
-const key='AIzaSyCks-FGFh7cLpuGuG7nJesq86eRsvKkFtw'
+
+const key = 'AIzaSyCks-FGFh7cLpuGuG7nJesq86eRsvKkFtw'
 export type VolumeInfoType = {
   title: string
   authors: string[]
   imageLinks: {
-    thumbnail: string
+    smallThumbnail: string
   },
+  categories: string[]
 }
 
 export type ItemType = {
-  kind: string
   id: string
   etag: string
   selfLink: string
@@ -23,13 +24,19 @@ export type ResponseType = {
   totalItems: number
 }
 
+type PayloadType = {
+  search: string
+  sort: string
+  filter: string
+}
 
-export const fetchBooks = createAsyncThunk<ResponseType, string, { rejectValue: string }>
-('books/fetchBooks', async (search, thunkAPI) => {
+export const fetchBooks = createAsyncThunk<ResponseType, PayloadType, { rejectValue: string }>
+('books/fetchBooks', async (payload, thunkAPI) => {
+  const {search, sort, filter} = payload
+  const queryParams = `${search}${filter}&orderBy=${sort}&key=${key}`
   try {
-    if (search) {}
-    const response = await axios.get<ResponseType>(search ?
-      'https://www.googleapis.com/books/v1/volumes?q='+search + `&key=${key}` : 'https://www.googleapis.com/books/v1/volumes?q=search+terms')
+    // const response = await axios.get<ResponseType>('https://www.googleapis.com/books/v1/volumes?q=' + search + `&key=${key}`)
+    const response = await axios.get<ResponseType>(`https://www.googleapis.com/books/v1/volumes?q=${queryParams}`)
     console.log(response.data)
     return response.data
   } catch (error) {
@@ -74,14 +81,16 @@ const booksSlice = createSlice({
       .addCase(fetchBooks.fulfilled, (state, action) => {
         state.isLoading = false
         state.books = action.payload.items
-        state.totalItems=action.payload.totalItems
+        state.totalItems = action.payload.totalItems
         state.error = ''
 
 
       })
       .addCase(fetchBooks.rejected, (state, action) => {
         state.isLoading = false
-        if (action.payload) {state.error = action.payload}
+        if (action.payload) {
+          state.error = action.payload
+        }
       })
   },
 })

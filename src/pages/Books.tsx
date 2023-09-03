@@ -4,6 +4,8 @@ import {SingleBook} from '../components/SingleBook/SingleBook';
 import {Header} from '../components/Header/Header';
 import {ItemType} from '../store/booksSlice';
 import {useAppSelector} from '../hooks/hooks';
+import coverMockup from '../assets/bookPrev.jpg'
+
 
 
 export const Books = () => {
@@ -28,10 +30,12 @@ export const Books = () => {
         {/*{JSON.stringify(books)}*/}
         <p>Books Found: {totalItems}</p>
         <div className={styles.books}>
-          {books.map((book:ItemType) => {
-            return <SingleBook key={book.id} kind={book.kind} authors={book.volumeInfo.authors} title={book.volumeInfo.title}
-              cover={book.volumeInfo.imageLinks.thumbnail}/>
+          {books.length && books.map((book: ItemType) => {
+            console.log( book.volumeInfo.imageLinks.smallThumbnail)
+            return <SingleBook key={book.id} categories={book.volumeInfo.categories} authors={book.volumeInfo.authors} title={book.volumeInfo.title}
+              cover={book.volumeInfo.imageLinks.smallThumbnail  ? book.volumeInfo.imageLinks.smallThumbnail : coverMockup}
 
+            />
           })}
         </div>
 

@@ -10,13 +10,12 @@ export const Header = () => {
   const dispatch = useAppDispatch()
 
   const [search, setSearch] = useState('')
-  const [sort, setSort] = useState('')
-  /*  useEffect(() => {
-    dispatch(fetchBooks('startaaaaa'))
-  }, [])*/
+  const [filter, setFilter] = useState('all')
+  const [sort, setSort] = useState('relevance')
+
   const onClickHandler = () => {
-    dispatch(fetchBooks(search))
-    console.log(search)
+    dispatch(fetchBooks({search, filter, sort}))
+    console.log(search, filter, sort)
   }
 
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -26,8 +25,13 @@ export const Header = () => {
     console.log(search)
   }
 
-  const onChangeSelectHandler = (value:string) => {
+  const onChangeSortSelectHandler = (value:string) => {
+
     setSort(value)
+    console.log(value)
+  }
+  const onChangeFilterSelectHandler = (value:string) => {
+    setFilter(value)
     console.log(value)
   }
 
@@ -50,19 +54,19 @@ export const Header = () => {
   return (
     <header className={style.headerWrapper}>
       <h1>Search for Books</h1>
-      <form >
+      <div >
         <Input type='search' value={search} onChange={onChangeHandler}
           placeholder={'Please, enter book title'}/>
         <button onClick={onClickHandler}>PRESS</button>
         <Button>Search</Button>
-      </form>
+      </div>
 
       <div className={style.selects}>
         <h4>Categories</h4>
-        <Select options={categoryOptions}  value={sort} onChange={onChangeSelectHandler}/>
+        <Select options={categoryOptions}  value={filter} onChange={onChangeFilterSelectHandler}/>
 
         <h4>Sorting by</h4>
-        <Select options={sortingOptions} value={sort} onChange={onChangeSelectHandler}></Select>
+        <Select options={sortingOptions} value={sort} onChange={onChangeSortSelectHandler}></Select>
 
       </div>
 

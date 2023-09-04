@@ -1,17 +1,15 @@
-import React, {FC} from 'react';
+import React from 'react';
 import style from './SingleBook.module.scss'
 
 type SingleBookPropsType = {
   categories: string[],
   authors: string[]
   title: string
-  cover?: string
+  cover: string
 }
 
 
-
-export const SingleBook: FC<SingleBookPropsType> = ({categories, authors, title, cover}) => {
-
+export const SingleBook = ({categories, authors, title, cover}: SingleBookPropsType) => {
 
   return (
     <div className={style.singleBook}>
@@ -19,7 +17,7 @@ export const SingleBook: FC<SingleBookPropsType> = ({categories, authors, title,
         <img src={cover} alt={'bookTitle'}/>
       </div>
       <div className={style.textBlock}>
-        {categories ? <p>{categories[0]}</p>: ''}
+        {!!categories?.length && <p>{categories[0]}</p>}
         <div>{authors ? authors.map((author, index) => {
           return <p key={index}>{author}</p>
         }) : ''}</div>

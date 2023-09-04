@@ -3,7 +3,7 @@ import style from './Header.module.scss'
 import {Button} from '../UI/Button/Button';
 import {Input} from '../UI/Input/Input';
 import {Select} from '../Select/Select';
-import {fetchBooks} from '../../store/booksSlice';
+import {changeCategory, changeSearch, changeSort, fetchBooks} from '../../store/booksSlice';
 import {useAppDispatch} from '../../hooks/hooks';
 
 export const Header = () => {
@@ -14,7 +14,10 @@ export const Header = () => {
   const [sort, setSort] = useState('relevance')
 
   const onClickHandler = () => {
-    dispatch(fetchBooks({search, filter, sort}))
+    dispatch(changeSearch(search))
+    dispatch(changeCategory(filter))
+    dispatch(changeSort(sort))
+    dispatch(fetchBooks())
     console.log(search, filter, sort)
   }
 

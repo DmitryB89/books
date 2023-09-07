@@ -1,12 +1,6 @@
 import React from 'react';
 import style from './SingleBook.module.scss'
-
-type SingleBookPropsType = {
-  categories: string[],
-  authors: string[]
-  title: string
-  cover: string
-}
+import {SingleBookPropsType} from './types';
 
 
 export const SingleBook = ({categories, authors, title, cover}: SingleBookPropsType) => {
@@ -17,14 +11,15 @@ export const SingleBook = ({categories, authors, title, cover}: SingleBookPropsT
         <img src={cover} alt={'bookTitle'}/>
       </div>
       <div className={style.textBlock}>
-        {!!categories?.length && <p>{categories[0]}</p>}
-        <div>{authors ? authors.map((author, index) => {
-          return <p key={index}>{author}</p>
-        }) : ''}</div>
-        <p>{title}</p>
+        {!!categories?.length && <p className={style.category}>{categories[0]}</p>}
+        <div className={style.authors}>{!!authors?.length && <p>{authors.join(',')}</p>}</div>
+        <h4 className={style.title}>{title}</h4>
       </div>
 
     </div>
   );
 };
 
+// {title.length < 80
+//   ? `${title}`
+//   : `${title.substring(0, 40)}...`}

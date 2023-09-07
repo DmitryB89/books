@@ -1,17 +1,65 @@
+:root {
+
+    --clr-white: #fff;
+    --clr-black: #222;
+    --clr-gray: rgba(211, 211, 211, 0.8);
+    --clr-light-gray: rgba(211, 211, 211, 0.38);
+    --clr-dark-gray: rgb(182, 182, 182);
+    --clr-purple1: rgba(187, 131, 251, 0.9);
+    --clr-purple2: rgba(145, 86, 217, 0.9);
+    --clr-purple3: rgb(98, 35, 168);
+    --transition: all 0.3s linear;
+    --radius: 2em;
+    --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    --max-width: 1100px;
+}
 
 
 body {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--clr-light-gray);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+button {
+    border-radius: var(--radius);
+    border: none;
+    background: var(--clr-purple2);
+    color: var(--clr-white);
+    position: relative;
+    padding: 0.5em 1em;
+    outline: none;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow:var(--dark-shadow);
+    overflow: hidden;
+   }
+button:hover {
+    background-color: var(--clr-purple3);
 }
+
+input {
+    border-radius: var(--radius);
+    border: none;
+    padding: 0 1.5rem
+
+}
+
+input::placeholder {
+    color: var(--clr-gray);
+}
+
+select {
+    border-radius: var(--radius);
+    border: none;
+    padding: 0.8rem;
+}
+
+

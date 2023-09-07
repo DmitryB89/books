@@ -1,15 +1,14 @@
-import React, {FC} from 'react';
+import React from 'react';
 
 type ButtonPropsType = {
-    children: React.ReactNode
-    disabled?:boolean
-  // onClick:()=>void
+  children: React.ReactNode
+  disabled?: boolean
+  onClick: () => void
 }
 
-export const Button: FC<ButtonPropsType> = ({children, ...props}) => {
+export const Button = ({children, ...props}: ButtonPropsType) => {
   return (
-    <button {...props}>{children}</button>
-
+    <button {...props} >{children}</button>
   );
 };
 

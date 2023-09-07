@@ -1,0 +1,12 @@
+.errorWrapper {
+  display: flex;
+  flex-direction: column;
+
+  .imgContainer {
+    align-self: center;
+  }
+
+  .textContainer {
+    align-self: center;
+  }
+}

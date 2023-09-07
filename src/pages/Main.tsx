@@ -1,61 +1,63 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './Main.module.scss'
 import {SingleBook} from '../components/SingleBook/SingleBook';
 import {Header} from '../components/Header/Header';
-import {fetchBooks, ItemType} from '../store/booksSlice';
+import {fetchBooks} from '../store/booksSlice';
 import {useAppDispatch, useAppSelector} from '../hooks/hooks';
 import coverMockup from '../assets/bookPrev.jpg'
 import {MAX_RESULTS} from '../utils/constants';
+import {Loader} from '../components/Loader/Loader';
+import Error from '../components/Error/Error'
+import {ItemType} from '../store/types';
+import {Button} from '../components/UI/Button/Button';
 
 
 export const Main = () => {
   const dispatch = useAppDispatch()
   const [value, setValue] = useState(0)
+  // const [currentPage, setCurrentPage] = useState(1)
   useEffect(() => {
-    dispatch(fetchBooks(value))
+    value && dispatch(fetchBooks(value))
   }, [value])
   const onClickHandler = () => {
+    // dispatch(changeCurrentPage())
+
     setValue((value) => value + MAX_RESULTS)
   }
 
-  const {books, isLoading, error, totalItems} = useAppSelector(state => state.books)
 
+  const {books, isLoading, error} = useAppSelector(state => state.books)
+  const totalItems = useAppSelector(state => state.books.totalItems)
+  // const totalPages = Math.ceil (totalItems / 30)
+  // console.log(currentPage < totalPages)
 
-  // async function fetchBooks() {
-  //   const response = await fetch('https://www.googleapis.com/books/v1/volumes?q=search+terms');
-  //   const books = await response.json();
-  //   console.log(books);
-  // }
-  // const fetchBooks = () => {
-  //   axios.get('https://www.googleapis.com/books/v1/volumes?q=flowers').then(res => console.log(res.data)).catch(err => console.log(err));
-  // }
-  // const onClickHandler = () => {
-  //   setIndex((index) => {
-  //     return  index+1
-  //   })
-  // }
-
+  console.log(Number(value) < Number(totalItems))
   return (
     <>
       <Header/>
-      {isLoading && <h1>Loading...</h1>}
-      {error && <h1>{error}</h1>}
-      <div className={styles.booksListWrapper}>
-        {/*{JSON.stringify(books)}*/}
+      {isLoading ? <Loader/> : <div className={styles.booksListWrapper}>
         <p>Books Found: {totalItems}</p>
         <div className={styles.books}>
           {!!books?.length && books.map((book: ItemType) => {
             return <SingleBook key={book.etag} categories={book.volumeInfo.categories} authors={book.volumeInfo.authors} title={book.volumeInfo.title}
               cover={book?.volumeInfo?.imageLinks?.smallThumbnail ? book.volumeInfo.imageLinks.smallThumbnail : coverMockup}
-
             />
           })}
         </div>
-        <button onClick={onClickHandler}>LOAD MORE</button>
+        {/*{currentPage < totalPages &&<button onClick={onClickHandler}>Load more</button>}*/}
+        <div className={styles.loadMore}>
+          {value < totalItems && <Button onClick={onClickHandler}>Load more</Button>}
+        </div>
 
-      </div>
+        {/*{value < totalItems || totalItems > 30 ? <button onClick={onClickHandler}>Load more</button> : <></> }*/}
+      </div>}
+      {error && <Error error={error}/>}
+
     </>
   );
 };
 
-// AIzaSyCks-FGFh7cLpuGuG7nJesq86eRsvKkFtw
+// {numResults > 30 && books.length < data.totalItems && (
+//   <Button type="button" onClick={() => dispatch(loadMoreAction())}>
+//     Load More
+//   </Button>

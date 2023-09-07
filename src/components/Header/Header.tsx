@@ -1,10 +1,15 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import style from './Header.module.scss'
 import {Button} from '../UI/Button/Button';
 import {Input} from '../UI/Input/Input';
-import {Select} from '../Select/Select';
+import {Select} from '../UI/Select/Select';
 import {changeCategory, changeSearch, changeSort, fetchBooks} from '../../store/booksSlice';
 import {useAppDispatch} from '../../hooks/hooks';
+import {categoryOptions} from '../../utils/options'
+import {sortingOptions} from '../../utils/options'
+import searchIcon from '../../assets/loupe.png'
+
+
 
 export const Header = () => {
   const dispatch = useAppDispatch()
@@ -21,58 +26,50 @@ export const Header = () => {
     console.log(search, filter, sort)
   }
 
-  const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-
-    event.preventDefault()
-    setSearch(event.target.value)
+  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault()
+    setSearch(e.target.value)
     console.log(search)
   }
 
-  const onChangeSortSelectHandler = (value:string) => {
+  const onChangeSortSelectHandler = (value: string) => {
 
     setSort(value)
     console.log(value)
   }
-  const onChangeFilterSelectHandler = (value:string) => {
+  const onChangeFilterSelectHandler = (value: string) => {
     setFilter(value)
     console.log(value)
   }
-
-
-  const categoryOptions = [
-    {value: 'all', title: 'all'},
-    {value: 'art', title: 'art'},
-    {value: 'biography', title: 'biography'},
-    {value: 'computers', title: 'computers'},
-    {value: 'history', title: 'history'},
-    {value: 'medical', title: 'medical'},
-    {value: 'poetry', title: 'poetry'},
-  ]
-
-  const sortingOptions = [
-    {value: 'relevance', title: 'relevance'},
-    {value: 'newest', title: 'newest'},
-  ]
+  const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      dispatch(changeSearch(search))
+      dispatch(changeCategory(filter))
+      dispatch(changeSort(sort))
+      dispatch(fetchBooks())
+    }
+  }
 
   return (
     <header className={style.headerWrapper}>
       <h1>Search for Books</h1>
-      <div >
-        <Input type='search' value={search} onChange={onChangeHandler}
-          placeholder={'Please, enter book title'}/>
-        <button onClick={onClickHandler}>PRESS</button>
-        <Button>Search</Button>
+      <div className={style.searchBlock}>
+        <div className={style.inputBlock}>
+          <Input type='search' value={search} onChange={onChangeHandler}
+            placeholder={'Please, enter book title'} onKeyPress={onKeyPressHandler}/>
+          <Button onClick={onClickHandler}>
+            <img src={searchIcon} alt={'searchIcon'} className={style.searchIcon}></img>
+
+          </Button>
+        </div>
+        <div className={style.selectsBlock}>
+
+          <h4>Category</h4>
+          <Select options={categoryOptions} value={filter} onChange={onChangeFilterSelectHandler}/>
+          <h4>Sort by</h4>
+          <Select options={sortingOptions} value={sort} onChange={onChangeSortSelectHandler}></Select>
+        </div>
       </div>
-
-      <div className={style.selects}>
-        <h4>Categories</h4>
-        <Select options={categoryOptions}  value={filter} onChange={onChangeFilterSelectHandler}/>
-
-        <h4>Sorting by</h4>
-        <Select options={sortingOptions} value={sort} onChange={onChangeSortSelectHandler}></Select>
-
-      </div>
-
     </header>
   );
 };

@@ -10,7 +10,6 @@ import {sortingOptions} from '../../utils/options'
 import searchIcon from '../../assets/loupe.png'
 
 
-
 export const Header = () => {
   const dispatch = useAppDispatch()
 
@@ -18,28 +17,26 @@ export const Header = () => {
   const [filter, setFilter] = useState('all')
   const [sort, setSort] = useState('relevance')
 
+
   const onClickHandler = () => {
     dispatch(changeSearch(search))
     dispatch(changeCategory(filter))
     dispatch(changeSort(sort))
     dispatch(fetchBooks())
+
     console.log(search, filter, sort)
   }
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
     setSearch(e.target.value)
-    console.log(search)
   }
 
   const onChangeSortSelectHandler = (value: string) => {
-
     setSort(value)
-    console.log(value)
   }
   const onChangeFilterSelectHandler = (value: string) => {
     setFilter(value)
-    console.log(value)
   }
   const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {

@@ -5,12 +5,13 @@ import {InitialStateType, ThunkAPIType, ResponseType} from './types';
 export const fetchBooks = createAsyncThunk<ResponseType, number | undefined, ThunkAPIType>(  'books/fetchBooks',
   async (index = 0, {getState, dispatch, rejectWithValue}) => {
     const {category, sort, search} = getState().books;
-    dispatch(changeLimit(index));
     const subject = category === 'all' ? '' : category;
     const queryParams = `intitle:${search}+subject:${subject}&orderBy=${sort}&startIndex=${index}&maxResults=${MAX_RESULTS}&key=${process.env.REACT_APP_KEY}`;
+    dispatch(changeLimit(index));
 
     try {
       const res = await fetch(BASE_URL + queryParams);
+
       return res.json();
     } catch (e) {
       return rejectWithValue('Something went wrong...');
@@ -35,15 +36,21 @@ const booksSlice = createSlice({
   reducers: {
     changeCategory: (state, action: PayloadAction<string>) => {
       state.category = action.payload;
+      state.limit = 0
     },
     changeSort: (state, action: PayloadAction<string>) => {
       state.sort = action.payload;
+      state.limit = 0
+
     },
     changeSearch: (state, action: PayloadAction<string>) => {
       state.search = action.payload;
+      state.limit = 0
+
     },
     changeLimit: (state, action: PayloadAction<number>) => {
       state.limit = action.payload;
+
     },
   },
   extraReducers: (builder) => {
@@ -55,10 +62,11 @@ const booksSlice = createSlice({
         fetchBooks.fulfilled,
         (state, action: PayloadAction<ResponseType>) => {
           console.log(`limit: ${state.limit}`);
+          console.log(`totalItems: ${state.totalItems}`);
           state.isLoading = false;
-          state.books = state.limit === 0 ? action.payload.items : [...state.books, ...action.payload.items];
+          state.books = state.limit === 0 ?  action.payload.items : [...state.books, ...action.payload.items];
           state.totalItems = action.payload.totalItems;
-          state.error = '';
+          state.error = null;
         },
       )
       .addCase(fetchBooks.rejected, (state, action) => {

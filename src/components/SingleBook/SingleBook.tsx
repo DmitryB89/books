@@ -19,7 +19,3 @@ export const SingleBook = ({categories, authors, title, cover}: SingleBookPropsT
     </div>
   );
 };
-
-// {title.length < 80
-//   ? `${title}`
-//   : `${title.substring(0, 40)}...`}

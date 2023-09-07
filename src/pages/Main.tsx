@@ -15,21 +15,21 @@ import {Button} from '../components/UI/Button/Button';
 export const Main = () => {
   const dispatch = useAppDispatch()
   const [value, setValue] = useState(0)
-  // const [currentPage, setCurrentPage] = useState(1)
+  const totalItems = useAppSelector(state => state.books.totalItems)
+  const {books, isLoading, error} = useAppSelector(state => state.books)
+
   useEffect(() => {
     value && dispatch(fetchBooks(value))
   }, [value])
   const onClickHandler = () => {
-    // dispatch(changeCurrentPage())
-
     setValue((value) => value + MAX_RESULTS)
+
   }
 
 
-  const {books, isLoading, error} = useAppSelector(state => state.books)
-  const totalItems = useAppSelector(state => state.books.totalItems)
-  // const totalPages = Math.ceil (totalItems / 30)
+
   // console.log(currentPage < totalPages)
+
 
   console.log(Number(value) < Number(totalItems))
   return (
@@ -46,7 +46,9 @@ export const Main = () => {
         </div>
         {/*{currentPage < totalPages &&<button onClick={onClickHandler}>Load more</button>}*/}
         <div className={styles.loadMore}>
-          {value < totalItems && <Button onClick={onClickHandler}>Load more</Button>}
+          {value+MAX_RESULTS < totalItems  && <Button onClick={onClickHandler}>Load more</Button>}
+          {/*{<Button onClick={onClickHandler}>Load more</Button>}*/}
+          {/*{currentPage < totalPages && <Button onClick={onClickHandler}>Load more</Button>}*/}
         </div>
 
         {/*{value < totalItems || totalItems > 30 ? <button onClick={onClickHandler}>Load more</button> : <></> }*/}

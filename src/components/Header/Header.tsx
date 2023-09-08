@@ -3,40 +3,63 @@ import style from './Header.module.scss'
 import {Button} from '../UI/Button/Button';
 import {Input} from '../UI/Input/Input';
 import {Select} from '../UI/Select/Select';
-import {changeCategory, changeSearch, changeSort, fetchBooks} from '../../store/booksSlice';
+import {changeCategory, changeLimit, changeSearch, changeSort, fetchBooks} from '../../store/booksSlice';
 import {useAppDispatch} from '../../hooks/hooks';
 import {categoryOptions} from '../../utils/options'
 import {sortingOptions} from '../../utils/options'
 import searchIcon from '../../assets/loupe.png'
 
+type PropsType = {
+  changeValue:()=> void
+}
 
-export const Header = () => {
+export const Header = ({changeValue}:PropsType) => {
   const dispatch = useAppDispatch()
 
   const [search, setSearch] = useState('')
   const [filter, setFilter] = useState('all')
   const [sort, setSort] = useState('relevance')
+  // useEffect(() => {
+  //   dispatch(fetchBooks())
+  // }, [sort,filter])
 
 
   const onClickHandler = () => {
     dispatch(changeSearch(search))
     dispatch(changeCategory(filter))
     dispatch(changeSort(sort))
+    changeValue()
     dispatch(fetchBooks())
 
     console.log(search, filter, sort)
   }
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
     setSearch(e.target.value)
   }
 
-  const onChangeSortSelectHandler = (value: string) => {
-    setSort(value)
+  const onChangeSortSelectHandler = (e:ChangeEvent<HTMLSelectElement>) => {
+    setSort(e.target.value)
+    dispatch(changeSort(sort))
+    dispatch(changeLimit(0))
+    changeValue()
+
+
+    // dispatch(fetchBooks())
+
+
+
+
   }
-  const onChangeFilterSelectHandler = (value: string) => {
-    setFilter(value)
+  const onChangeFilterSelectHandler = (e:ChangeEvent<HTMLSelectElement>) => {
+    setFilter(e.target.value)
+    dispatch(changeCategory(filter))
+    dispatch(changeLimit(0))
+    changeValue()
+
+    // dispatch(fetchBooks())
+
+
   }
   const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -44,6 +67,9 @@ export const Header = () => {
       dispatch(changeCategory(filter))
       dispatch(changeSort(sort))
       dispatch(fetchBooks())
+      changeValue()
+
+
     }
   }
 
@@ -61,10 +87,12 @@ export const Header = () => {
         </div>
         <div className={style.selectsBlock}>
 
-          <h4>Category</h4>
-          <Select options={categoryOptions} value={filter} onChange={onChangeFilterSelectHandler}/>
-          <h4>Sort by</h4>
-          <Select options={sortingOptions} value={sort} onChange={onChangeSortSelectHandler}></Select>
+          <label htmlFor='category'>Category</label>
+          <Select options={categoryOptions} value={filter} onChange={onChangeFilterSelectHandler}  ariaLabel={'category'}
+            id={'category'} />
+          <label htmlFor='sort'>Sort by</label>
+          <Select options={sortingOptions} value={sort} onChange={onChangeSortSelectHandler} ariaLabel={'sort'}
+            id={'sort'} ></Select>
         </div>
       </div>
     </header>

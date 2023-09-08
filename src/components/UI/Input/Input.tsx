@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, KeyboardEvent} from 'react';
+import React, {ChangeEvent, KeyboardEvent} from 'react';
 
 type InputPropsType = {
   children?: React.ReactNode
@@ -10,7 +10,7 @@ type InputPropsType = {
   onKeyPress?:(e:KeyboardEvent<HTMLInputElement>) => void
 }
 
-export const Input:FC<InputPropsType> = ({children,...props}) => {
+export const Input = ({children,...props}:InputPropsType) => {
   return (
     <input {...props}>
       {children}

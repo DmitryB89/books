@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styles from './Main.module.scss'
 import {SingleBook} from '../components/SingleBook/SingleBook';
 import {Header} from '../components/Header/Header';
-import {fetchBooks} from '../store/booksSlice';
+import { fetchBooks} from '../store/booksSlice';
 import {useAppDispatch, useAppSelector} from '../hooks/hooks';
 import coverMockup from '../assets/bookPrev.jpg'
 import {MAX_RESULTS} from '../utils/constants';
@@ -22,19 +22,19 @@ export const Main = () => {
     value && dispatch(fetchBooks(value))
   }, [value])
   const onClickHandler = () => {
-    setValue((value) => value + MAX_RESULTS)
-
+    setValue(value => value + MAX_RESULTS)
   }
-
-
+  console.log(`value:${value}`)
 
   // console.log(currentPage < totalPages)
 
-
+  const changeValue = () => {
+    setValue(0)
+  }
   console.log(Number(value) < Number(totalItems))
   return (
     <>
-      <Header/>
+      <Header changeValue={changeValue}/>
       {isLoading ? <Loader/> : <div className={styles.booksListWrapper}>
         <p>Books Found: {totalItems}</p>
         <div className={styles.books}>
@@ -46,7 +46,7 @@ export const Main = () => {
         </div>
         {/*{currentPage < totalPages &&<button onClick={onClickHandler}>Load more</button>}*/}
         <div className={styles.loadMore}>
-          {value+MAX_RESULTS < totalItems  && <Button onClick={onClickHandler}>Load more</Button>}
+          {value + 30 < totalItems && <Button onClick={onClickHandler}>Load more</Button>}
           {/*{<Button onClick={onClickHandler}>Load more</Button>}*/}
           {/*{currentPage < totalPages && <Button onClick={onClickHandler}>Load more</Button>}*/}
         </div>

@@ -1,14 +1,14 @@
 export  const categoryOptions = [
-  {value: 'all', title: 'all'},
-  {value: 'art', title: 'art'},
-  {value: 'biography', title: 'biography'},
-  {value: 'computers', title: 'computers'},
-  {value: 'history', title: 'history'},
-  {value: 'medical', title: 'medical'},
-  {value: 'poetry', title: 'poetry'},
+  {value: 'all', label: 'all'},
+  {value: 'art', label: 'art'},
+  {value: 'biography', label: 'biography'},
+  {value: 'computers', label: 'computers'},
+  {value: 'history', label: 'history'},
+  {value: 'medical', label: 'medical'},
+  {value: 'poetry', label: 'poetry'},
 ]
 
 export const sortingOptions = [
-  {value: 'relevance', title: 'relevance'},
-  {value: 'newest', title: 'newest'},
+  {value: 'relevance', label: 'relevance'},
+  {value: 'newest', label: 'newest'},
 ]

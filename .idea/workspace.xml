@@ -6,10 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="2a295edd-fa10-4b67-b295-aad825a21d7b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header/Header.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/Header.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SingleBook/SingleBook.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SingleBook/SingleBook.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/UI/Input/Input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/Input/Input.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/UI/Select/Select.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/Select/Select.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Main.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/booksSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/booksSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/options.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/options.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +30,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="RESET_MODE" value="MIXED" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -86,7 +89,8 @@
       <workItem from="1693958586478" duration="3518000" />
       <workItem from="1693986395673" duration="22623000" />
       <workItem from="1694042842252" duration="589000" />
-      <workItem from="1694077519646" duration="24504000" />
+      <workItem from="1694077519646" duration="44318000" />
+      <workItem from="1694132013153" duration="7524000" />
     </task>
     <servers />
   </component>

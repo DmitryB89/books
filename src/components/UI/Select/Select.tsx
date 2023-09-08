@@ -1,31 +1,33 @@
-import React, {ChangeEvent, FC} from 'react';
+import React, {ChangeEvent} from 'react';
 
 type OptionType = {
     value:string
-    title:string
+    label:string
 }
 
 type SelectPropsType = {
     options:OptionType[]
     value:string
-    onChange:(arg:string) => void
+    onChange:(e:ChangeEvent<HTMLSelectElement>)=> void
+  ariaLabel?:string
+  id?:string
+  // callback:() => void
+
     // defaultValue:string
 }
 
 
-export const Select:FC<SelectPropsType> = ({options,value, onChange}) => {
+export const Select= ({options,value, onChange,ariaLabel,id}:SelectPropsType) => {
 
-  const onChangeHandler = (event:ChangeEvent<HTMLSelectElement>) => {
-    onChange(event.target.value)
-  }
+
 
 
   return (
-    <select value={value} onChange={onChangeHandler}>
+    <select value={value} onChange={onChange} aria-label={ariaLabel} id={id}>
       {/*<option disabled value=''>{defaultValue}</option>*/}
       {options.map(option =>
         <option value={option.value} key={option.value}>
-          {option.title}
+          {option.label}
         </option>,
       )}
     </select>

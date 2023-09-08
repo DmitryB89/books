@@ -11,7 +11,6 @@ export const fetchBooks = createAsyncThunk<ResponseType, number | undefined, Thu
 
     try {
       const res = await fetch(BASE_URL + queryParams);
-
       return res.json();
     } catch (e) {
       return rejectWithValue('Something went wrong...');
@@ -49,6 +48,7 @@ const booksSlice = createSlice({
 
     },
     changeLimit: (state, action: PayloadAction<number>) => {
+      state.limit = 0
       state.limit = action.payload;
 
     },

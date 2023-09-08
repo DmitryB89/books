@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/books/static/css/main.776cf00a.css",
+    "main.js": "/books/static/js/main.ad72680a.js",
+    "static/media/background.jpg": "/books/static/media/background.dc06bf826d3448bb647f.jpg",
+    "static/media/errorSign.png": "/books/static/media/errorSign.eb5a9ff376810dbabf28.png",
+    "static/media/loupe.png": "/books/static/media/loupe.f2643e21258e460d1041.png",
+    "static/media/bookPrev.jpg": "/books/static/media/bookPrev.718535b9aa364c6df819.jpg",
+    "index.html": "/books/index.html",
+    "main.776cf00a.css.map": "/books/static/css/main.776cf00a.css.map",
+    "main.ad72680a.js.map": "/books/static/js/main.ad72680a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.776cf00a.css",
+    "static/js/main.ad72680a.js"
+  ]
+}

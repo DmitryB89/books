@@ -5,7 +5,7 @@
   width: 200px;
   height: auto;
   border-radius: 0.5em;
-  box-shadow:var(--dark-shadow);
+  box-shadow: var(--dark-shadow);
 
   .bookCover {
     display: flex;
@@ -19,7 +19,7 @@
       width: 120px;
       object-fit: fill;
       border-radius: 0.5em;
-      box-shadow:var(--dark-shadow);
+      box-shadow: var(--dark-shadow);
     }
   }
 
@@ -28,26 +28,22 @@
     flex-direction: column;
     padding: 1.5rem;
 
-
     .category {
       font-size: 0.6rem;
       color: var(--clr-purple2);
       margin-bottom: 0.5rem;
-
-
     }
+
     .authors {
       font-size: 0.6rem;
       font-weight: 500;
     }
+
     .title {
       margin-top: 0;
       font-size: 0.8rem;
       color: var(--clr-black);
       margin-bottom: 0;
-
-
-
     }
   }
 }

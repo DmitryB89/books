@@ -4,7 +4,6 @@ import {SingleBookPropsType} from './types';
 
 
 export const SingleBook = ({categories, authors, title, cover}: SingleBookPropsType) => {
-
   return (
     <div className={style.singleBook}>
       <div className={style.bookCover}>
@@ -15,7 +14,6 @@ export const SingleBook = ({categories, authors, title, cover}: SingleBookPropsT
         <div className={style.authors}>{!!authors?.length && <p>{authors.join(',')}</p>}</div>
         <h4 className={style.title}>{title}</h4>
       </div>
-
     </div>
   );
 };

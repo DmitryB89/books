@@ -1,4 +1,4 @@
-export  const categoryOptions = [
+export const categoryOptions = [
   {value: 'all', label: 'all'},
   {value: 'art', label: 'art'},
   {value: 'biography', label: 'biography'},

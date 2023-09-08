@@ -1,5 +1,4 @@
 :root {
-
     --clr-white: #fff;
     --clr-black: #222;
     --clr-gray: rgba(211, 211, 211, 0.8);
@@ -38,9 +37,10 @@ button {
     outline: none;
     font-size: 1rem;
     cursor: pointer;
-    box-shadow:var(--dark-shadow);
+    box-shadow: var(--dark-shadow);
     overflow: hidden;
-   }
+}
+
 button:hover {
     background-color: var(--clr-purple3);
 }
@@ -49,7 +49,6 @@ input {
     border-radius: var(--radius);
     border: none;
     padding: 0 1.5rem
-
 }
 
 input::placeholder {
